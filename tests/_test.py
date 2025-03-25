@@ -1,4 +1,3 @@
-# tests/test_integration.py
 import select
 import pytest
 from fastapi.testclient import TestClient
@@ -24,7 +23,7 @@ async def async_db_session():
 async def test_wallet_endpoint_integration(async_db_session):
     mock_response = {
         "data": [{
-            "balance": 1_000_000,  # 1 TRX
+            "balance": 1_000_000,
             "freeNetLimit": 5000,
             "EnergyLimit": 1000
         }]
@@ -42,6 +41,7 @@ async def test_wallet_endpoint_integration(async_db_session):
         assert data["bandwidth"] == 5000
         assert data["energy"] == 1000
 
+        await async_db_session.commit()
         result = await async_db_session.execute(select(WalletRequest))
         db_entry = result.scalars().first()
         assert db_entry.address == "TF5Bn4qJKMWeQJShR6D1WpAxh53m5BMp6d"
