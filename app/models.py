@@ -9,11 +9,6 @@ KRASNOYARSK_TZ = timezone('Asia/Krasnoyarsk')
 
 Base = declarative_base()
 
-
-KRASNOYARSK_TZ = timezone('Asia/Krasnoyarsk')
-
-Base = declarative_base()
-
 class WalletRequest(Base):
     __tablename__ = "wallet_requests"
     id = Column(Integer, primary_key=True, index=True)
